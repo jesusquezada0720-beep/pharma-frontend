@@ -1,10 +1,7 @@
 <aside class="sidebar">
   <nav>
     @for (item of menu; track item.ruta) {
-    <a
-      [routerLink]="item.ruta"
-      routerLinkActive="active"
-    >
+    <a [routerLink]="item.ruta" routerLinkActive="activo">
       {{ item.icono }} {{ item.etiqueta }}
     </a>
     }

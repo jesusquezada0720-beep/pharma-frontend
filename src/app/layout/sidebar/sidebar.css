@@ -1,0 +1,6 @@
+:host { display: block; height: 100%; }
+.sidebar { height: 100%; padding: 12px; background: #fff; border-right: 1px solid #e3e8f0; }
+nav { display: flex; flex-direction: column; gap: 4px; }
+a { padding: 10px 12px; border-radius: 8px; color: #1f2937; text-decoration: none; }
+a:hover { background: #eef2f7; }
+a.activo { background: #0f2e5c; color: #fff; }

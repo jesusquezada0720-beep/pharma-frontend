@@ -1,0 +1,8 @@
+:host { display: block; }
+.header { height: 100%; display: flex; align-items: center; gap: 16px; padding: 0 16px; background: #0f2e5c; color: #fff; }
+.hamburguesa { background: transparent; border: 1px solid #fff; color: #fff; border-radius: 6px; padding: 4px 10px; font-size: 18px; cursor: pointer; }
+.marca { font-size: 18px; }
+.menu-bar { display: flex; gap: 14px; flex: 1; }
+.menu-bar a { color: #cbd5e1; text-decoration: none; }
+.menu-bar a:hover { color: #fff; }
+.usuario { font-size: 14px; }

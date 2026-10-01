@@ -1,0 +1,12 @@
+.shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: 56px 1fr;
+  grid-template-areas: "header header" "sidebar main";
+  min-height: 100vh;
+}
+.shell.colapsado { grid-template-columns: 0 1fr; }
+.shell.colapsado .area-sidebar { display: none; }
+.area-header { grid-area: header; }
+.area-sidebar { grid-area: sidebar; }
+.area-main { grid-area: main; padding: 24px; background: #f4f6fa; }

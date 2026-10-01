@@ -8,5 +8,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.css',
 })
 export class Header {
-  protected readonly toggleMenu = output<void>();
+  readonly toggleMenu = output<void>();
 }
