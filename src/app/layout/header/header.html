@@ -1,0 +1,29 @@
+<header class="header">
+  <button
+    type="button"
+    class="menu-toggle"
+    (click)="toggleMenu.emit()"
+    aria-label="Mostrar u ocultar menú"
+  >
+    ☰
+  </button>
+
+  <div class="brand">
+    <strong>PharmaSoft</strong>
+  </div>
+
+  <nav>
+    <a routerLink="/inicio">Inicio</a>
+
+    <a
+      href="http://localhost:8080/swagger-ui.html"
+      target="_blank"
+    >
+      API
+    </a>
+  </nav>
+
+  <div class="user">
+    Invitado
+  </div>
+</header>

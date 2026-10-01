@@ -1,3 +1,27 @@
 import { Routes } from '@angular/router';
+import { MainLayout } from './layout/main-layout/main-layout';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  {
+    path: '',
+    component: MainLayout,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'inicio' },
+      {
+        path: 'inicio',
+        title: 'Inicio',
+        loadComponent: () => import('./features/inicio/inicio').then((m) => m.Inicio),
+      },
+      {
+        path: 'categorias',
+        loadChildren: () =>
+          import('./features/categorias/categorias.routes').then((m) => m.CATEGORIAS_ROUTES),
+      },
+    ],
+  },
+  {
+    path: '**',
+    title: 'Página no encontrada',
+    loadComponent: () => import('./features/not-found/not-found').then((m) => m.NotFound),
+  },
+];
