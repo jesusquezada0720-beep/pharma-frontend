@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
@@ -26,6 +26,8 @@ export class ProductoList implements OnInit {
 
   private readonly categoriaService = inject(CategoriaService);
 
+  readonly categoriaId = input<string>();
+
   readonly productos = signal<Producto[]>([]);
 
   readonly categorias = signal<Categoria[]>([]);
@@ -51,8 +53,21 @@ export class ProductoList implements OnInit {
   readonly categoriaFiltro = signal<number | null>(null);
 
   ngOnInit(): void {
+    const cat = this.categoriaId();
+
+    if (cat) {
+      this.categoriaFiltro.set(Number(cat));
+      this.tamanio.set(100);
+    }
+
     this.cargarCategorias();
     this.cargar();
+  }
+
+  nombreFiltro(): string {
+    const id = this.categoriaFiltro();
+
+    return this.categorias().find((c) => c.id === id)?.nombre ?? String(id);
   }
 
   cargarCategorias(): void {

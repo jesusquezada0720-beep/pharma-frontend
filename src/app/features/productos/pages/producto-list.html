@@ -50,7 +50,7 @@
         track categoria.id
         ) {
 
-        <option [value]="categoria.id">
+        <option [value]="categoria.id" [selected]="categoria.id === categoriaFiltro()">
           {{ categoria.nombre }}
         </option>
 
@@ -79,12 +79,22 @@
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="20">20</option>
+        <option value="100" [selected]="tamanio() === 100">100</option>
 
       </select>
 
     </div>
 
   </div>
+
+
+  @if (categoriaId()) {
+
+  <div style="padding: 10px 14px; margin-bottom: 12px; border-radius: 8px; background: #e9f0f9; color: #0f2e5c;">
+    Mostrando productos de la categoría {{ nombreFiltro() }} en los primeros 100 registros.
+  </div>
+
+  }
 
 
   @if (cargando()) {
