@@ -1,0 +1,7 @@
+.barra { display: flex; gap: 16px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+.buscador { min-width: 320px; }
+.tamanio { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.ordenable { cursor: pointer; user-select: none; }
+.acciones { display: flex; gap: 8px; }
+.vacio { text-align: center; color: #6b7280; padding: 24px; }
+.paginacion { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; }

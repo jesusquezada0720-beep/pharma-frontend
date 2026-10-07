@@ -1,0 +1,68 @@
+<section class="page">
+  <header class="page-header">
+    <h2>Clientes</h2>
+    <a routerLink="nuevo" class="btn btn-primary">+ Nuevo cliente</a>
+  </header>
+
+  <div class="barra">
+    <input class="input buscador" placeholder="Buscar por DNI, nombres o apellidos..."
+           [value]="filtro()" (input)="filtro.set($any($event.target).value)" />
+
+    <label class="tamanio">
+      Por página
+      <select class="input" (change)="cambiarTamanio(+$any($event.target).value)">
+        <option value="5" [selected]="tamanio() === 5">5</option>
+        <option value="10" [selected]="tamanio() === 10">10</option>
+        <option value="20" [selected]="tamanio() === 20">20</option>
+      </select>
+    </label>
+  </div>
+
+  @if (error()) {
+  <div class="alerta">{{ error() }}</div>
+  }
+
+  @if (cargando()) {
+  <p>Cargando clientes...</p>
+  } @else {
+  <table class="tabla">
+    <thead>
+    <tr>
+      <th class="ordenable" (click)="ordenar('dni')">DNI {{ flecha('dni') }}</th>
+      <th class="ordenable" (click)="ordenar('apellidos')">Apellidos y nombres {{ flecha('apellidos') }}</th>
+      <th>Correo</th>
+      <th>Teléfono</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (c of filtrados(); track c.id) {
+    <tr>
+      <td>{{ c.dni }}</td>
+      <td>{{ c.apellidos }}, {{ c.nombres }}</td>
+      <td>{{ c.email }}</td>
+      <td>{{ c.telefono ?? '—' }}</td>
+      <td>
+        <span class="badge" [class.inactivo]="!c.estado">{{ c.estado ? 'Activo' : 'Inactivo' }}</span>
+      </td>
+      <td class="acciones">
+        <a [routerLink]="[c.id, 'editar']" class="btn">Editar</a>
+        <button type="button" class="btn btn-peligro" (click)="darDeBaja(c)">Dar de baja</button>
+      </td>
+    </tr>
+    } @empty {
+    <tr><td colspan="6" class="vacio">No hay clientes para mostrar.</td></tr>
+    }
+    </tbody>
+  </table>
+
+  @if (respuesta(); as r) {
+  <div class="paginacion">
+    <button type="button" class="btn" [disabled]="r.pagina === 0" (click)="anterior()">Anterior</button>
+    <span>Página {{ r.pagina + 1 }} de {{ r.totalPaginas || 1 }} · {{ r.totalElementos }} clientes</span>
+    <button type="button" class="btn" [disabled]="r.ultima" (click)="siguiente()">Siguiente</button>
+  </div>
+  }
+  }
+</section>

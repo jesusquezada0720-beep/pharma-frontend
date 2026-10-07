@@ -1,0 +1,130 @@
+.productos {
+  padding: 24px;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.encabezado h1 {
+  margin: 0;
+}
+
+.encabezado p {
+  margin: 6px 0 0;
+}
+
+.btn-nuevo {
+  display: inline-block;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.controles {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.control select {
+  min-width: 180px;
+  padding: 8px;
+}
+
+.mensaje-error {
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+.cargando {
+  padding: 30px;
+  text-align: center;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th button {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.estado {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+.activo {
+  background: #dff5e1;
+}
+
+.inactivo {
+  background: #f5dddd;
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-editar,
+.btn-baja {
+  padding: 6px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-baja:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.paginacion button {
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.paginacion button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.resumen {
+  margin-top: 12px;
+  text-align: center;
+}
