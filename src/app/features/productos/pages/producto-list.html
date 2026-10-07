@@ -1,0 +1,275 @@
+<section class="productos">
+
+  <header class="encabezado">
+
+    <div>
+      <h1>Productos</h1>
+      <p>Listado de productos</p>
+    </div>
+
+    <a
+      routerLink="/productos/nuevo"
+      class="btn-nuevo">
+      + Nuevo producto
+    </a>
+
+  </header>
+
+
+  @if (error()) {
+
+  <div class="mensaje-error">
+    {{ error() }}
+  </div>
+
+  }
+
+
+  <div class="controles">
+
+    <div class="control">
+
+      <label for="categoria">
+        Categoría
+      </label>
+
+      <select
+        id="categoria"
+        (change)="
+          filtrarPorCategoria(
+            $any($event.target).value
+          )
+        ">
+
+        <option value="">
+          Todas las categorías
+        </option>
+
+        @for (
+        categoria of categorias();
+        track categoria.id
+        ) {
+
+        <option [value]="categoria.id">
+          {{ categoria.nombre }}
+        </option>
+
+        }
+
+      </select>
+
+    </div>
+
+
+    <div class="control">
+
+      <label for="tamanio">
+        Registros por página
+      </label>
+
+      <select
+        id="tamanio"
+        [value]="tamanio()"
+        (change)="
+          cambiarTamanio(
+            $any($event.target).value
+          )
+        ">
+
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  @if (cargando()) {
+
+  <div class="cargando">
+    Cargando productos...
+  </div>
+
+  } @else {
+
+  <div class="tabla-contenedor">
+
+    <table>
+
+      <thead>
+
+      <tr>
+
+        <th>ID</th>
+
+        <th>
+          Nombre
+
+          <button
+            type="button"
+            (click)="ordenar('nombre')">
+            ↕
+          </button>
+        </th>
+
+        <th>
+          Precio
+
+          <button
+            type="button"
+            (click)="ordenar('precio')">
+            ↕
+          </button>
+        </th>
+
+        <th>
+          Stock
+
+          <button
+            type="button"
+            (click)="ordenar('stock')">
+            ↕
+          </button>
+        </th>
+
+        <th>Categoría</th>
+
+        <th>Estado</th>
+
+        <th>Acciones</th>
+
+      </tr>
+
+      </thead>
+
+
+      <tbody>
+
+      @for (
+      producto of productosFiltrados();
+      track producto.id
+      ) {
+
+      <tr>
+
+        <td>
+          {{ producto.id }}
+        </td>
+
+        <td>
+          {{ producto.nombre }}
+        </td>
+
+        <td>
+          S/
+          {{ producto.precio | number:'1.2-2' }}
+        </td>
+
+        <td>
+          {{ producto.stock }}
+        </td>
+
+        <td>
+          {{ producto.categoriaNombre }}
+        </td>
+
+        <td>
+
+          @if (producto.estado) {
+
+          <span class="estado activo">
+                    Activo
+                  </span>
+
+          } @else {
+
+          <span class="estado inactivo">
+                    Inactivo
+                  </span>
+
+          }
+
+        </td>
+
+
+        <td class="acciones">
+
+          <a
+            [routerLink]="[
+                    '/productos',
+                    producto.id,
+                    'editar'
+                  ]"
+            class="btn-editar">
+            Editar
+          </a>
+
+
+          <button
+            type="button"
+            class="btn-baja"
+            [disabled]="!producto.estado"
+            (click)="darDeBaja(producto)">
+            Dar de baja
+          </button>
+
+        </td>
+
+      </tr>
+
+      } @empty {
+
+      <tr>
+
+        <td colspan="7">
+          No hay productos para mostrar.
+        </td>
+
+      </tr>
+
+      }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <div class="paginacion">
+
+    <button
+      type="button"
+      [disabled]="pagina() === 0"
+      (click)="anterior()">
+      ← Anterior
+    </button>
+
+
+    <span>
+        Página {{ pagina() + 1 }}
+        de {{ totalPaginas() }}
+      </span>
+
+
+    <button
+      type="button"
+      [disabled]="ultima()"
+      (click)="siguiente()">
+      Siguiente →
+    </button>
+
+  </div>
+
+
+  <div class="resumen">
+    Total de productos:
+    {{ totalElementos() }}
+  </div>
+
+  }
+
+</section>
