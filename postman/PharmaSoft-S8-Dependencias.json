@@ -1,0 +1,430 @@
+{
+  "info": {
+    "_postman_id": "137b31fb-38b6-4f7f-a2a9-58e1b942e8d4",
+    "name": "PharmaSoft - S8 Dependencias",
+    "description": "Coleccion de pruebas de la Actividad Autonoma S8. Revisar los datos de cada peticion antes de enviarla.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54354093",
+    "_collection_link": "https://go.postman.co/collection/54354093-137b31fb-38b6-4f7f-a2a9-58e1b942e8d4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "00 - Preparacion",
+      "item": [
+        {
+          "name": "SETUP - GET categorias",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/categorias",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SETUP - GET productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/productos?pagina=0&tamanio=100&ordenarPor=nombre&direccion=asc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos"
+              ],
+              "query": [
+                {
+                  "key": "pagina",
+                  "value": "0"
+                },
+                {
+                  "key": "tamanio",
+                  "value": "100"
+                },
+                {
+                  "key": "ordenarPor",
+                  "value": "nombre"
+                },
+                {
+                  "key": "direccion",
+                  "value": "asc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SETUP - GET producto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/productos/{{productoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos",
+                "{{productoId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "A - Altas",
+      "item": [
+        {
+          "name": "A-02 - Crear sin categoria",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba S8 A02 sin categoria\",\n  \"precio\": 5.5,\n  \"stock\": 10,\n  \"estado\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A-03 - Categoria inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba S8 A03 inexistente\",\n  \"precio\": 5.5,\n  \"stock\": 10,\n  \"estado\": true,\n  \"categoriaId\": 999\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A-04 - Categoria inactiva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba S8 A04 categoria inactiva\",\n  \"precio\": 5.5,\n  \"stock\": 10,\n  \"estado\": true,\n  \"categoriaId\": 10\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A-06 - Precio cero y stock negativo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba S8 A06 datos invalidos\",\n  \"precio\": 0,\n  \"stock\": -1,\n  \"estado\": true,\n  \"categoriaId\": 7\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "C - Cambios",
+      "item": [
+        {
+          "name": "C-01 - Cambiar a categoria activa",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"REEMPLAZAR_CON_NOMBRE_REAL\",\n  \"precio\": 5.5,\n  \"stock\": 10,\n  \"estado\": true,\n  \"categoriaId\": 7\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos/{{productoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos",
+                "{{productoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "C-02 - Intentar cambiar a categoria inactiva",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"REEMPLAZAR_CON_NOMBRE_REAL\",\n  \"precio\": 5.5,\n  \"stock\": 10,\n  \"estado\": true,\n  \"categoriaId\": 10\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos/{{productoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos",
+                "{{productoId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "B - Bajas",
+      "item": [
+        {
+          "name": "B-02 - Dar de baja producto ya inactivo",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/productos/{{productoInactivoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos",
+                "{{productoInactivoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B-03 - Eliminar categoria sin productos",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaSinProductosId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaSinProductosId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "B-04 - Eliminar categoria con productos inactivos",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/categorias/9",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "9"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "P - Casos propios",
+      "item": [
+        {
+          "name": "P-01 - Crear con valores limite validos",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Prueba S8 P01 limite\",\n  \"precio\": 0.01,\n  \"stock\": 0,\n  \"estado\": true,\n  \"categoriaId\": 7\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "P-02 - Intentar cambiar a nombre duplicado",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"REEMPLAZAR_CON_NOMBRE_DUPLICADO\",\n  \"precio\": 5.5,\n  \"stock\": 10,\n  \"estado\": true,\n  \"categoriaId\": 7\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productos/{{productoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos",
+                "{{productoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "P-03 - Eliminar categoria con producto activo",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/categorias/{{categoriaConProductosActivosId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "categorias",
+                "{{categoriaConProductosActivosId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "P-04 - Consultar producto despues del cambio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/productos/{{productoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productos",
+                "{{productoId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api/v1"
+    },
+    {
+      "key": "productoId",
+      "value": "30"
+    },
+    {
+      "key": "productoInactivoId",
+      "value": "REEMPLAZAR_CON_ID_REAL"
+    },
+    {
+      "key": "categoriaSinProductosId",
+      "value": "REEMPLAZAR_CON_ID_REAL"
+    },
+    {
+      "key": "categoriaConProductosActivosId",
+      "value": "REEMPLAZAR_CON_ID_REAL"
+    }
+  ]
+}
