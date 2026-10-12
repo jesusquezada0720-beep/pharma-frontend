@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+﻿import { Routes } from '@angular/router';
 import { MainLayout } from './layout/main-layout/main-layout';
 
 export const routes: Routes = [
@@ -26,6 +26,11 @@ export const routes: Routes = [
         path: 'clientes',
         loadChildren: () =>
           import('./features/clientes/clientes.routes').then((m) => m.CLIENTES_ROUTES),
+      },
+      {
+        path: 'ventas',
+        loadChildren: () =>
+          import('./features/ventas/ventas.routes').then((m) => m.VENTAS_ROUTES),
       },
     ],
   },
