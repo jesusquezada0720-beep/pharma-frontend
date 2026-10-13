@@ -1,0 +1,58 @@
+<section class="page">
+  <header class="page-header">
+    <h2>Reporte de ventas por categoría</h2>
+    <button type="button" class="btn btn-primary" (click)="cargar()">
+      Actualizar
+    </button>
+  </header>
+
+  <div class="resumen">
+    <article class="card">
+      <span>Total de unidades</span>
+      <strong>{{ totalUnidades() }}</strong>
+    </article>
+
+    <article class="card">
+      <span>Monto total</span>
+      <strong>{{ totalMonto() | currency: 'PEN' : 'S/ ' }}</strong>
+    </article>
+  </div>
+
+  @if (error()) {
+    <div class="alerta">{{ error() }}</div>
+  }
+
+  @if (cargando()) {
+    <p>Cargando reporte...</p>
+  } @else {
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Categoría</th>
+          <th class="numero">Unidades</th>
+          <th class="numero">Monto</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of datos(); track item.categoria) {
+          <tr>
+            <td>{{ item.categoria }}</td>
+            <td class="numero">{{ item.unidades }}</td>
+            <td class="numero">{{ item.monto | currency: 'PEN' : 'S/ ' }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="3" class="vacio">No hay datos para mostrar.</td>
+          </tr>
+        }
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th class="numero">{{ totalUnidades() }}</th>
+          <th class="numero">{{ totalMonto() | currency: 'PEN' : 'S/ ' }}</th>
+        </tr>
+      </tfoot>
+    </table>
+  }
+</section>
